@@ -13,6 +13,8 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
+import java.util.stream.IntStream;
+
 public class TeaTreeFeature extends Feature<NoneFeatureConfiguration> {
 	public TeaTreeFeature() {
 		super(NoneFeatureConfiguration.CODEC);
@@ -25,7 +27,7 @@ public class TeaTreeFeature extends Feature<NoneFeatureConfiguration> {
 		WorldGenLevel world = context.level();
 		BlockState soil = world.getBlockState(down);
 		RandomSource random = context.random();
-		if (world.getBlockState(pos).isAir()) {
+		if (IntStream.range(0, 4).allMatch(i -> world.isEmptyBlock(pos.above(i)))) {
 			// TODO: move to tree?
 			BlockState trunk = Registration.tea_trunk.defaultBlockState().setValue(TeaTrunkBlock.CLIPPED, false);
 			// tree stump
