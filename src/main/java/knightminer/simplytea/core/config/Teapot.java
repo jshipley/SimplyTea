@@ -6,6 +6,7 @@ import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 public class Teapot {
   private BooleanValue infinite_water;
   private BooleanValue fill_from_cauldron;
+  private BooleanValue fill_from_fluid_tank;
   private BooleanValue milk_cow;
   public Teapot(ForgeConfigSpec.Builder builder) {
     builder.comment("Options related to filling the teapot").push("teapot");
@@ -15,6 +16,9 @@ public class Teapot {
     fill_from_cauldron = builder.comment("If true, the teapot can be filled with water from a cauldron")
                                 .translation("simplytea.config.teapot.fill_from_cauldron")
                                 .define("fill_from_cauldron", true);
+    fill_from_fluid_tank = builder.comment("If true, the teapot can be filled with water from a fluid tank")
+                                  .translation("simplytea.config.teapot.fill_from_fluid_tank")
+                                  .define("fill_from_fluid_tank", true);
     milk_cow = builder.comment("If true, cows can be milked using a teapot to fill it with milk")
                       .translation("simplytea.config.teapot.milk_cow")
                       .define("milk_cow", true);
@@ -29,6 +33,11 @@ public class Teapot {
   /** True if teapots can be filled from a cauldron */
   public boolean fillFromCauldron() {
     return fill_from_cauldron.get();
+  }
+
+  /** True if teapots can be filled from a fluid tank */
+  public boolean fillFromFluidTank() {
+    return fill_from_fluid_tank.get();
   }
 
   /** True if teapots can be used to milk cows */
