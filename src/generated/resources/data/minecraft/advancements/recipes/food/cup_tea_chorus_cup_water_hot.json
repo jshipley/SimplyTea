@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "simplytea:cup_tea_chorus"
+        "recipe": "minecraft:cup_tea_chorus_cup_water_hot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "simplytea:cup_tea_chorus"
+      "minecraft:cup_tea_chorus_cup_water_hot"
     ]
   },
   "sends_telemetry_event": false

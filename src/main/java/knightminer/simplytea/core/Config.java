@@ -14,7 +14,7 @@ public class Config {
 
 	public static class Server {
 		public TeaDrink black_tea, green_tea, floral_tea, chai_tea, chorus_tea, iced_tea;
-		public CocoaDrink cocoa;
+		public CocoaDrink cocoa, frothed_milk;
 		public Teapot teapot;
 		public Tree tree;
 		public Server(Builder builder) {
@@ -28,6 +28,7 @@ public class Config {
 			chorus_tea = new TeaDrink("chorus", builder, TeaEffect.ENDERFALLING, 3, 0.9, 150, 1);
 			iced_tea = new TeaDrink("iced", builder, TeaEffect.ABSORPTION, 3, 0.9, 90, 1);
 			cocoa = new CocoaDrink(builder, 4, 0.6);
+			frothed_milk = new CocoaDrink(builder, 2, 0.4);
 			builder.pop();
 
 			// other categories

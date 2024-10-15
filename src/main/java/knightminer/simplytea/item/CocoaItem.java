@@ -1,6 +1,7 @@
 package knightminer.simplytea.item;
 
 import knightminer.simplytea.core.Config;
+import knightminer.simplytea.core.Registration;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -29,16 +30,17 @@ public class CocoaItem extends TeaCupItem {
 
 	@Override
 	public ItemStack finishUsingItem(ItemStack stack, Level worldIn, LivingEntity living) {
+		boolean isMilk = stack.is(Registration.cup_frothed);
 		if (this.isEdible()) {
 			ItemStack result = getCraftingRemainingItem(stack);
 			living.eat(worldIn, stack);
-			if (!worldIn.isClientSide && Config.SERVER.cocoa.clearsEffects()) {
+			if (!worldIn.isClientSide && (Config.SERVER.cocoa.clearsEffects() || isMilk)) {
 				// logic basically copied from living entity, so we can choose which effects to remove
 				Iterator<MobEffectInstance> itr = living.getActiveEffectsMap().values().iterator();
 				boolean hasCinnamon = hasHoney(stack, CINNAMON_TAG);
 				while (itr.hasNext()) {
 					MobEffectInstance effect = itr.next();
-					if ((Config.SERVER.cocoa.clearsPositive() || !effect.getEffect().isBeneficial())
+					if ((Config.SERVER.cocoa.clearsPositive() || !effect.getEffect().isBeneficial() || isMilk)
 							&& effect.isCurativeItem(MILK_BUCKET) && !MinecraftForge.EVENT_BUS.post(new MobEffectEvent.Remove(living, effect))) {
 						living.onEffectRemoved(effect);
 						itr.remove();

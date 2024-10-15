@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "simplytea:teabag_green"
+              "simplytea:teabag_floral"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "simplytea:cup_tea_green"
+        "recipe": "minecraft:cup_tea_floral_teapot_hot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "simplytea:cup_tea_green"
+      "minecraft:cup_tea_floral_teapot_hot"
     ]
   },
   "sends_telemetry_event": false

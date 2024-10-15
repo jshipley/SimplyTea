@@ -37,6 +37,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -128,7 +129,9 @@ public class Registration {
   public static Item cup_tea_chai;
   public static Item cup_tea_iced;
   public static Item cup_tea_chorus;
+  public static Item cup_water_hot;
   public static Item cup_cocoa;
+  public static Item cup_frothed;
 
   /* World Gen */
   public static PlacementModifierType<TreeGenEnabledPlacement> tree_gen_enabled;
@@ -213,7 +216,9 @@ public class Registration {
       cup_tea_chai = register(r, new TeaCupItem(props.food(Config.SERVER.chai_tea)), "cup_tea_chai");
       cup_tea_iced = register(r, new TeaCupItem(props.food(Config.SERVER.iced_tea)), "cup_tea_iced");
       cup_tea_chorus = register(r, new TeaCupItem(props.food(Config.SERVER.chorus_tea)), "cup_tea_chorus");
+      cup_water_hot = register(r, new Item(props.food(new FoodProperties.Builder().alwaysEat().build())), "cup_water_hot");
       cup_cocoa = register(r, new CocoaItem(props.food(Config.SERVER.cocoa)), "cup_cocoa");
+      cup_frothed = register(r, new CocoaItem(props.food(Config.SERVER.cocoa)), "cup_frothed");
     });
 
     event.register(Registries.CREATIVE_MODE_TAB, r -> {
