@@ -217,8 +217,8 @@ public class Registration {
       cup_tea_iced = register(r, new TeaCupItem(props.food(Config.SERVER.iced_tea)), "cup_tea_iced");
       cup_tea_chorus = register(r, new TeaCupItem(props.food(Config.SERVER.chorus_tea)), "cup_tea_chorus");
       cup_water_hot = register(r, new Item(props.food(new FoodProperties.Builder().alwaysEat().build())), "cup_water_hot");
-      cup_cocoa = register(r, new CocoaItem(props.food(Config.SERVER.cocoa)), "cup_cocoa");
-      cup_frothed = register(r, new CocoaItem(props.food(Config.SERVER.cocoa)), "cup_frothed");
+      cup_cocoa = register(r, new CocoaItem(props.food(Config.SERVER.cocoa), Config.SERVER.cocoa), "cup_cocoa");
+      cup_frothed = register(r, new CocoaItem(props.food(Config.SERVER.frothed_milk), Config.SERVER.cocoa), "cup_frothed");
     });
 
     event.register(Registries.CREATIVE_MODE_TAB, r -> {
