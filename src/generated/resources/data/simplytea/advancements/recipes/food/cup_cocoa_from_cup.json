@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "simplytea:teabag_black"
+              "minecraft:cocoa_beans"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:cup_tea_black_teapot_hot"
+        "recipe": "simplytea:cup_cocoa_from_cup"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:cup_tea_black_teapot_hot"
+      "simplytea:cup_cocoa_from_cup"
     ]
   },
   "sends_telemetry_event": false

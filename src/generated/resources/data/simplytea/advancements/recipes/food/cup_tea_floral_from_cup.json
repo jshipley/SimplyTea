@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_item": {
+    "has_bag": {
       "conditions": {
         "items": [
           {
             "items": [
-              "simplytea:teapot_milk"
+              "simplytea:teabag_floral"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:milk_bucket_from_teapot"
+        "recipe": "simplytea:cup_tea_floral_from_cup"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_item",
+      "has_bag",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:milk_bucket_from_teapot"
+      "simplytea:cup_tea_floral_from_cup"
     ]
   },
   "sends_telemetry_event": false

@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "simplytea:teapot_frothed"
+              "simplytea:teapot_hot"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:cup_frothed_teapot_frothed"
+        "recipe": "simplytea:cup_water_hot_from_teapot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:cup_frothed_teapot_frothed"
+      "simplytea:cup_water_hot_from_teapot"
     ]
   },
   "sends_telemetry_event": false

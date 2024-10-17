@@ -96,18 +96,6 @@ public class RecipeGenerator extends RecipeProvider {
 		boil(consumer, teapot_water, teapot_hot);
 		boil(consumer, teapot_milk, teapot_frothed);
 
-		// empty teapots
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.WATER_BUCKET)
-											 .requires(teapot_water)
-											 .requires(Items.BUCKET)
-											 .unlockedBy("has_item", has(teapot_water))
-											 .save(consumer, "water_bucket_from_teapot");
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.MILK_BUCKET)
-											 .requires(teapot_milk)
-											 .requires(Items.BUCKET)
-											 .unlockedBy("has_item", has(teapot_milk))
-											 .save(consumer, "milk_bucket_from_teapot");
-
 		// teabags
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, teabag, 4)
 											 .pattern("  S").pattern("PP ").pattern("PP ")
@@ -122,14 +110,15 @@ public class RecipeGenerator extends RecipeProvider {
 		addTeaWithBag(consumer, tea_leaf, teabag_green, cup_tea_green);
 		addTeaWithBag(consumer, black_tea, teabag_black, cup_tea_black);
 		addTeaWithBag(consumer, chorus_petal, teabag_chorus, cup_tea_chorus);
-		addTea(consumer, cup_water_hot, teapot_hot);
-		addTea(consumer, cup_frothed, teapot_frothed);
+		addTea(consumer, cup_water_hot, "teapot", teapot_hot);
+		addTea(consumer, cup_frothed, "teapot", teapot_frothed);
 
 		// advanced tea
-		addTea(consumer, cup_cocoa, Items.COCOA_BEANS, Items.COCOA_BEANS, teapot_frothed);
-		addTea(consumer, cup_cocoa, Items.COCOA_BEANS, cup_frothed);
+		addTea(consumer, cup_cocoa, "teapot", Items.COCOA_BEANS, Items.COCOA_BEANS, teapot_frothed);
+		addTea(consumer, cup_cocoa, "cup", Items.COCOA_BEANS, Items.COCOA_BEANS, cup_frothed);
 		addHoney(consumer, RecipeCategory.FOOD, cup_cocoa, tea_stick, CocoaItem.CINNAMON_TAG);
-		addTea(consumer, cup_tea_chai, teabag_black, tea_stick, teapot_frothed);
+		addTea(consumer, cup_tea_chai, "teapot", teabag_black, tea_stick, teapot_frothed);
+		addTea(consumer, cup_tea_chai, "cup", teabag_black, tea_stick, cup_frothed);
 		addHoney(consumer, cup_tea_chai);
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, cup_tea_iced)
 													.requires(cup)
@@ -165,14 +154,14 @@ public class RecipeGenerator extends RecipeProvider {
 	}
 
 	/** Adds a recipe to pour tea */
-	private static void addTea(Consumer<FinishedRecipe> consumer, ItemLike filledCup, ItemLike... ingredients) {
+	private static void addTea(Consumer<FinishedRecipe> consumer, ItemLike filledCup, String suffix, ItemLike... ingredients) {
 		ShapelessRecipeBuilder builder = ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, filledCup);
 		builder.requires(cup);
 		for (ItemLike ingredient : ingredients) {
 			builder.requires(ingredient);
 		}
 		builder.unlockedBy("has_bag", has(ingredients[0]));
-		builder.save(consumer, filledCup.toString() + "_" + ingredients[ingredients.length-1].toString());
+		builder.save(consumer, suffix(filledCup, "_from_" + suffix).toString());
 	}
 
 	/** Creates a recipe to add honey to a tea */
@@ -206,8 +195,8 @@ public class RecipeGenerator extends RecipeProvider {
 													.requires(leaf)
 													.unlockedBy("has_leaf", has(leaf))
 													.save(consumer);
-		addTea(consumer, filledCup, filledTeabag, teapot_hot);
-		addTea(consumer, filledCup, filledTeabag, cup_water_hot);
+		addTea(consumer, filledCup, "teapot", filledTeabag, teapot_hot);
+		addTea(consumer, filledCup, "cup", filledTeabag, cup_water_hot);
 		addHoney(consumer, filledCup);
 	}
 }
