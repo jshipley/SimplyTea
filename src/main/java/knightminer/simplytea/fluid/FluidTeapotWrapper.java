@@ -3,6 +3,7 @@ package knightminer.simplytea.fluid;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import knightminer.simplytea.core.Config;
 import knightminer.simplytea.core.Registration;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
@@ -15,7 +16,6 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
-import static net.minecraftforge.fluids.FluidType.BUCKET_VOLUME;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 
 public class FluidTeapotWrapper implements IFluidHandlerItem, ICapabilityProvider {
@@ -41,7 +41,7 @@ public class FluidTeapotWrapper implements IFluidHandlerItem, ICapabilityProvide
 
 	@Override
 	public int getTankCapacity(int tank) {
-		return BUCKET_VOLUME;
+		return Config.SERVER.teapot.teapotCapacity();
 	}
 
     public static boolean isWater(Fluid fluid) {
@@ -62,7 +62,7 @@ public class FluidTeapotWrapper implements IFluidHandlerItem, ICapabilityProvide
 
 	@Override
 	public int fill(FluidStack resource, FluidAction action) {
-		if (container.getCount() != 1 || !isFluidValid(0, resource) || resource.getAmount() < BUCKET_VOLUME) {
+		if (container.getCount() != 1 || !isFluidValid(0, resource) || resource.getAmount() < Config.SERVER.teapot.teapotCapacity()) {
             return 0;
         }
 		
@@ -74,7 +74,7 @@ public class FluidTeapotWrapper implements IFluidHandlerItem, ICapabilityProvide
             }
 		}
 		
-		return BUCKET_VOLUME;
+		return Config.SERVER.teapot.teapotCapacity();
 	}
 
 	@Override

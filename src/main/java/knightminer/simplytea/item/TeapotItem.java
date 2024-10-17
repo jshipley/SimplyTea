@@ -26,7 +26,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult.Type;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.FluidActionResult;
-import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
@@ -77,7 +76,7 @@ public class TeapotItem extends TooltipItem {
 		if (filledStack.isEmpty()) {
 			Optional<IFluidHandler> fluidSource = FluidUtil.getFluidHandler(world, pos, side).resolve();
 			if (fluidSource.isPresent()) {
-				FluidActionResult actionResult = FluidUtil.tryFillContainer(stack, fluidSource.get(), FluidType.BUCKET_VOLUME, player, true);
+				FluidActionResult actionResult = FluidUtil.tryFillContainer(stack, fluidSource.get(), Config.SERVER.teapot.teapotCapacity(), player, true);
 				if (actionResult.isSuccess()) {
 					filledStack = actionResult.getResult();
 				}
