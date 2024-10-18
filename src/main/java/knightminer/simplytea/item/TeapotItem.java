@@ -63,20 +63,9 @@ public class TeapotItem extends TooltipItem {
 				}
 			}
 			
-			// should work in most cases
+			// use teapot like a bucket to get fluid, should work in most cases
 			if (filledStack.isEmpty()) {
 				FluidActionResult actionResult = FluidUtil.tryPickUpFluid(stack, player, world, pos, side);
-				if (actionResult.isSuccess()) {
-					filledStack = actionResult.getResult();
-				}
-			}
-		}
-
-		// if pickup block doesn't work, try accessing the fluid handler
-		if (filledStack.isEmpty()) {
-			Optional<IFluidHandler> fluidSource = FluidUtil.getFluidHandler(world, pos, side).resolve();
-			if (fluidSource.isPresent()) {
-				FluidActionResult actionResult = FluidUtil.tryFillContainer(stack, fluidSource.get(), Config.SERVER.teapot.teapotCapacity(), player, true);
 				if (actionResult.isSuccess()) {
 					filledStack = actionResult.getResult();
 				}

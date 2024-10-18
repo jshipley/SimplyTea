@@ -47,7 +47,7 @@ public class FluidTeapotWrapper implements IFluidHandlerItem, ICapabilityProvide
     public static boolean isWater(Fluid fluid) {
         // Many modded fluids use the WATER tag to give the fluids entity interaction
         // Only accept Fluids.WATER and not any other fluid tagged as WATER
-        return fluid.isSame(Fluids.WATER);
+        return fluid.isSame(Fluids.WATER) || fluid.isSame(Fluids.FLOWING_WATER);
     }
 
     public static boolean isMilk(Fluid fluid) {

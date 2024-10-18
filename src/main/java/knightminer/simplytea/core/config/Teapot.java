@@ -8,7 +8,6 @@ import net.minecraftforge.fluids.FluidType;
 public class Teapot {
   private BooleanValue infinite_water;
   private BooleanValue fill_from_cauldron;
-  private BooleanValue fill_from_fluid_tank;
   private BooleanValue milk_cow;
   private IntValue teapot_capacity;
   public Teapot(ForgeConfigSpec.Builder builder) {
@@ -22,7 +21,7 @@ public class Teapot {
     milk_cow = builder.comment("If true, cows can be milked using a teapot to fill it with milk")
                       .translation("simplytea.config.teapot.milk_cow")
                       .define("milk_cow", true);
-    teapot_capacity = builder.comment("Amount of fluid a teapot can contain")
+    teapot_capacity = builder.comment("Amount of fluid consumed when filling a teapot from a tank")
                              .translation("simplytea.config.teapot.teapot_capacity")
                              .defineInRange("teapot_capacity", FluidType.BUCKET_VOLUME, 1, FluidType.BUCKET_VOLUME * 256);
     builder.pop();
@@ -36,11 +35,6 @@ public class Teapot {
   /** True if teapots can be filled from a cauldron */
   public boolean fillFromCauldron() {
     return fill_from_cauldron.get();
-  }
-
-  /** True if teapots can be filled from a fluid tank */
-  public boolean fillFromFluidTank() {
-    return fill_from_fluid_tank.get();
   }
 
   /** True if teapots can be used to milk cows */
