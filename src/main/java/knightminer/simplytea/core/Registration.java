@@ -10,6 +10,7 @@ import knightminer.simplytea.data.gen.RecipeGenerator;
 import knightminer.simplytea.data.gen.ShapelessHoneyRecipe;
 import knightminer.simplytea.data.gen.WorldgenGenerator;
 import knightminer.simplytea.item.CocoaItem;
+import knightminer.simplytea.item.ColdTeapotItem;
 import knightminer.simplytea.item.HotTeapotItem;
 import knightminer.simplytea.item.TeaCupItem;
 import knightminer.simplytea.item.TeaStickItem;
@@ -206,8 +207,8 @@ public class Registration {
 
       // filled teapots
       props.craftRemainder(teapot).stacksTo(1);
-      teapot_water = register(r, new TeapotItem(props), "teapot_water");
-      teapot_milk = register(r, new TeapotItem(props), "teapot_milk");
+      teapot_water = register(r, new ColdTeapotItem(props), "teapot_water");
+      teapot_milk = register(r, new ColdTeapotItem(props), "teapot_milk");
       props.setNoRepair().durability(4);
       teapot_hot = register(r, new HotTeapotItem(props), "teapot_hot");
       teapot_frothed = register(r, new HotTeapotItem(props), "teapot_frothed");

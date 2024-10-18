@@ -41,19 +41,6 @@ public class TeapotItem extends TooltipItem {
 			BlockPos pos = rayTrace.getBlockPos();
 			BlockState state = world.getBlockState(pos);
 
-			if (player.getPose() == Pose.CROUCHING && !stack.is(Registration.teapot) && rayTrace.getDirection() != Direction.DOWN) {
-				player.playSound(SoundEvents.BUCKET_EMPTY, 1.0f, 1.0f);
-				if (!world.isClientSide) {
-					for (int i = 0; i < 5; i++) {
-						SimpleParticleType particle = stack.is(Registration.teapot_milk) ? Registration.milk_splash : ParticleTypes.SPLASH;
-						((ServerLevel)world).sendParticles(particle, (double)pos.getX() + world.random.nextDouble(), (double)pos.getY() + 1, (double)pos.getZ() + world.random.nextDouble(), 1, 0.0D, 0.0D, 0.0D, 1.0D);
-					}
-				}
-				// emptying a teapot will not create new empty teapots in creative mode if player already has an empty teapot
-				ItemStack emptyTeapot = ItemUtils.createFilledResult(stack, player, new ItemStack(Registration.teapot));
-				return InteractionResultHolder.sidedSuccess(emptyTeapot, world.isClientSide);
-			}
-
 			// we use name for lookup to prevent default fluid conflicts
 			Fluid fluid = state.getFluidState().getType();
 			if(fluid != Fluids.EMPTY) {
