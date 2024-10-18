@@ -26,6 +26,7 @@ import knightminer.simplytea.worldgen.TeaTreeGrower;
 import knightminer.simplytea.worldgen.TreeGenEnabledPlacement;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.cauldron.CauldronInteraction;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -133,6 +134,9 @@ public class Registration {
   public static Item cup_cocoa;
   public static Item cup_frothed;
 
+  /* Particles */
+  public static SimpleParticleType milk_splash;
+
   /* World Gen */
   public static PlacementModifierType<TreeGenEnabledPlacement> tree_gen_enabled;
   public static Feature<NoneFeatureConfiguration> tea_tree;
@@ -202,8 +206,8 @@ public class Registration {
 
       // filled teapots
       props.craftRemainder(teapot).stacksTo(1);
-      teapot_water = register(r, new TooltipItem(props), "teapot_water");
-      teapot_milk = register(r, new TooltipItem(props), "teapot_milk");
+      teapot_water = register(r, new TeapotItem(props), "teapot_water");
+      teapot_milk = register(r, new TeapotItem(props), "teapot_milk");
       props.setNoRepair().durability(4);
       teapot_hot = register(r, new HotTeapotItem(props), "teapot_hot");
       teapot_frothed = register(r, new HotTeapotItem(props), "teapot_frothed");
@@ -217,8 +221,12 @@ public class Registration {
       cup_tea_iced = register(r, new TeaCupItem(props.food(Config.SERVER.iced_tea)), "cup_tea_iced");
       cup_tea_chorus = register(r, new TeaCupItem(props.food(Config.SERVER.chorus_tea)), "cup_tea_chorus");
       cup_water_hot = register(r, new Item(props.food(new FoodProperties.Builder().alwaysEat().build())), "cup_water_hot");
-      cup_cocoa = register(r, new CocoaItem(props.food(Config.SERVER.cocoa), Config.SERVER.cocoa), "cup_cocoa");
-      cup_frothed = register(r, new CocoaItem(props.food(Config.SERVER.frothed_milk), Config.SERVER.cocoa), "cup_frothed");
+      cup_cocoa = register(r, new CocoaItem(props.food(Config.SERVER.cocoa)), "cup_cocoa");
+      cup_frothed = register(r, new CocoaItem(props.food(Config.SERVER.frothed_milk)), "cup_frothed");
+    });
+
+    event.register(Registries.PARTICLE_TYPE, r -> {
+      milk_splash = register(r, new SimpleParticleType(false), "milk_splash");
     });
 
     event.register(Registries.CREATIVE_MODE_TAB, r -> {

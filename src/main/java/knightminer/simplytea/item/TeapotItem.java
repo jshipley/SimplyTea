@@ -4,12 +4,16 @@ import knightminer.simplytea.core.Config;
 import knightminer.simplytea.core.Registration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -36,6 +40,19 @@ public class TeapotItem extends TooltipItem {
 		if (rayTrace.getType() == Type.BLOCK) {
 			BlockPos pos = rayTrace.getBlockPos();
 			BlockState state = world.getBlockState(pos);
+
+			if (player.getPose() == Pose.CROUCHING && !stack.is(Registration.teapot) && rayTrace.getDirection() != Direction.DOWN) {
+				player.playSound(SoundEvents.BUCKET_EMPTY, 1.0f, 1.0f);
+				if (!world.isClientSide) {
+					for (int i = 0; i < 5; i++) {
+						SimpleParticleType particle = stack.is(Registration.teapot_milk) ? Registration.milk_splash : ParticleTypes.SPLASH;
+						((ServerLevel)world).sendParticles(particle, (double)pos.getX() + world.random.nextDouble(), (double)pos.getY() + 1, (double)pos.getZ() + world.random.nextDouble(), 1, 0.0D, 0.0D, 0.0D, 1.0D);
+					}
+				}
+				// emptying a teapot will not create new empty teapots in creative mode if player already has an empty teapot
+				ItemStack emptyTeapot = ItemUtils.createFilledResult(stack, player, new ItemStack(Registration.teapot));
+				return InteractionResultHolder.sidedSuccess(emptyTeapot, world.isClientSide);
+			}
 
 			// we use name for lookup to prevent default fluid conflicts
 			Fluid fluid = state.getFluidState().getType();

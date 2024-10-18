@@ -28,8 +28,8 @@ public class Config {
 			chai_tea   = new TeaDrink("chai", builder, TeaEffect.INVIGORATED, 5, 0.6, 150, 1);
 			chorus_tea = new TeaDrink("chorus", builder, TeaEffect.ENDERFALLING, 3, 0.9, 150, 1);
 			iced_tea = new TeaDrink("iced", builder, TeaEffect.ABSORPTION, 3, 0.9, 90, 1);
-			cocoa = new CocoaDrink(builder, ClearType.NEGATIVE, 4, 0.6);
-			frothed_milk = new CocoaDrink(builder, ClearType.ALL, 1, 0.2);
+			cocoa = new CocoaDrink("cocoa", builder, ClearType.NEGATIVE, 4, 0.6);
+			frothed_milk = new CocoaDrink("frothed_milk", builder, ClearType.ALL, 1, 0.2);
 			builder.pop();
 
 			// other categories
